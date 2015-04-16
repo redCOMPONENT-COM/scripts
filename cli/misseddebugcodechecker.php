@@ -5,10 +5,10 @@
  * This CLI is used instead normal travis.yml execution to avoid error in travis build when
  * PHPMD exits with 2.
  *
- * @copyright  Copyright (C) 2008 - 2015 redCOMPONENT, Inc. All rights reserved.
+ * @copyright  Copyright (C) 2008 - 2015 Open Source Matters, Inc. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  *
- * @example: php .travis/misseddebugcodechecker.php component/ libraries/
+ * @example: php .travis/phpmd.php component/ libraries/
  */
 
 // Only run on the CLI SAPI
@@ -33,13 +33,12 @@ for($i=1;$i < count($argv);$i++)
 
     if (!file_exists($folderToCheck))
     {
-        fwrite(STDOUT, "\033[32;1mFolder: " . $argv[$i] . " does not exist\033[0m\n");
+        fwrite(STDOUT, "\033[31;1mFolder: " . $argv[$i] . " does not exist\033[0m\n");
         continue;
     }
 
-    fwrite(STDOUT, "\033[32;1m- Checking missed debug code at: " . $argv[$i] . "\033[0m\n");
+    fwrite(STDOUT, "\033[33;1m- Checking missed debug code at: " . $argv[$i] . "\033[0m\n");
     $vardumpCheck = shell_exec('grep -r --include "*.php" var_dump ' . $folderToCheck);
-    $consolelogCheck = shell_exec('grep -r --include "*.js" console.log ' . $folderToCheck);
 
 
     if ($vardumpCheck)
@@ -48,12 +47,22 @@ for($i=1;$i < count($argv);$i++)
         fwrite(STDOUT, $vardumpCheck);
         exit(1);
     }
+    else
+    {
+        fwrite(STDOUT, "\033[32;1mGood: No var_dumps were found \033[0m\n");
+    }
+
+    $consolelogCheck = shell_exec('grep -r --include "*.js" console.log ' . $folderToCheck);
 
     if ($consolelogCheck)
     {
         fwrite(STDOUT, "\033[31;1mWARNING: Missed Debug code detected: console.log was found\033[0m\n");
         fwrite(STDOUT, $consolelogCheck);
         exit(1);
+    }
+    else
+    {
+        fwrite(STDOUT, "\033[32;1mGood: No console_log were found \033[0m\n");
     }
 }
 
