@@ -39,14 +39,14 @@ try {
 // Included folders to review
 $include = array();
 
-foreach ($configuration['code-style']['include'] as $includedFolder)
+foreach ($configuration['check-code-style']['include'] as $includedFolder)
 {
     $include[] = REPO_BASE . '/' . $includedFolder;
 }
 
 // Ignored files
 $ignored = array();
-foreach ($configuration['code-style']['ignore'] as $ignoredFiles)
+foreach ($configuration['check-code-style']['ignore'] as $ignoredFiles)
 {
     $ignored[] = REPO_BASE .  '/' . $ignoredFiles;
 }
