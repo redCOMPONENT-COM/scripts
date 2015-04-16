@@ -31,7 +31,7 @@ require REPO_BASE . '/vendor/autoload.php';
 $yaml = new Parser();
 
 try {
-    $configuration = $yaml->parse(file_get_contents(REPO_BASE . '/robo.yml'));
+    $configuration = $yaml->parse(file_get_contents(REPO_BASE . '/travis-checks.yml'));
 } catch (ParseException $e) {
     printf("Unable to parse the robo.yml : %s", $e->getMessage());
 }
