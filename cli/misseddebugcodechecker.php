@@ -15,7 +15,7 @@
 (php_sapi_name() == 'cli' ?: die('CLI only'));
 
 // Script defines
-define('REPO_BASE', dirname(__DIR__));
+define('REPO_BASE', getcwd());
 
 // Welcome message
 fwrite(STDOUT, "\033[32;1mInitializing PHP Debug Missed Debug Code Checker.\033[0m\n");
