@@ -33,7 +33,7 @@ $yaml = new Parser();
 try {
     $configuration = $yaml->parse(file_get_contents(REPO_BASE . '/travis-checks.yml'));
 } catch (ParseException $e) {
-    printf("Unable to parse the robo.yml : %s", $e->getMessage());
+    printf("Unable to parse the travis-checks.yml : %s", $e->getMessage());
 }
 
 // Included folders to review
