@@ -33,11 +33,11 @@ for($i=1;$i < count($argv);$i++)
 
     if (!file_exists($folderToCheck))
     {
-        fwrite(STDOUT, "\033[31;1mFolder: " . $argv[$i] . " does not exist\033[0m\n");
+        fwrite(STDOUT, "\033[31;1mFolder: " . $folderToCheck . " does not exist\033[0m\n");
         continue;
     }
 
-    fwrite(STDOUT, "\033[33;1m- Checking missed debug code at: " . $argv[$i] . "\033[0m\n");
+    fwrite(STDOUT, "\033[33;1m- Checking missed debug code at: " . $folderToCheck . "\033[0m\n");
     $vardumpCheck = shell_exec('grep -r --include "*.php" var_dump ' . $folderToCheck);
 
 
